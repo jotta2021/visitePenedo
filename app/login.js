@@ -21,8 +21,8 @@ import Toast from "react-native-toast-message";
   import { router, useNavigation } from "expo-router";
 import { contextAuth } from "../contexts";
   export default function Index() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("joanderson@gmail.com");
+    const [password, setPassword] = useState("123456");
     const {LoginUser,loading, userData} =useContext(contextAuth);
     const navigation = useNavigation();
     function Autentication() {

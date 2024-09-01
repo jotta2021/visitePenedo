@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Card } from '@rneui/themed';
 import { Rating } from 'react-native-ratings';
 import axios from 'axios';
 import api from '../services/api';
+import { router } from 'expo-router';
 
-const CardHoteis = ({ data }) => {
+const CardHoteis = ({ data ,  selectItem,setSelectItem}) => {
   const [imageUrl, setImageUrl] = useState(null);
 
   // Se o nome do local for muito grande, adiciona reticências
@@ -42,9 +43,14 @@ const CardHoteis = ({ data }) => {
       getImageUrl();
     }
   }, [data]);
-
   return (
     <Card containerStyle={styles.card}>
+      <TouchableOpacity
+      onPress={()=> {setSelectItem(data)
+router.push('/home/localePage')
+
+      }}
+      >
       <View>
         {imageUrl ? (
           <Image
@@ -70,6 +76,7 @@ const CardHoteis = ({ data }) => {
           readonly
         />
       </View>
+      </TouchableOpacity>
     </Card>
   );
 };

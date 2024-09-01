@@ -43,7 +43,7 @@ const CardPoints = ({ data }) => {
     }
   }, [data]);
 
-console.log(data.displayName)
+
 
   return (
     <Card containerStyle={styles.card}>

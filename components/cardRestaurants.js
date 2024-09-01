@@ -65,7 +65,7 @@ const CardRestaurants = ({ data }) => {
       </View >
 
 <View style={styles.containerButton}>
-    <Button buttonStyle={styles.button}>Visitar</Button>
+    <Button buttonStyle={styles.button} >Visitar</Button>
 </View>
       
 
@@ -122,7 +122,7 @@ marginTop:5
   button:{
     backgroundColor:'#CC4848',
     borderRadius:10,
-    width:120,
+    width:200,
     height:40,
   }
 });

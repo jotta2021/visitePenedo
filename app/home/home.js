@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useContext} from 'react';
 import { View,Text, SafeAreaView, StyleSheet, FlatList, ScrollView } from 'react-native';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
@@ -10,58 +10,58 @@ import getHoteis from '../../helpers/getHoteis';
 import getRestaurants from '../../helpers/getRestaurants';
 import getTouristics from '../../helpers/getTouristcs';
 import CardPoints from '../../components/cardsPoints';
+
+import LottieView from 'lottie-react-native'
+
+import { contextAuth } from '../../contexts';
+import Loading from '../../components/loading';
 export default function Home(){
 const [search,setSearch] = useState('');
 // armazena a lista de hoteis
 const [listHoteis,setListHoteis] = useState([])
 const [listRestaurants,setListRestaurants] = useState([])
 const [points,setPoints] = useState([])
+const [loading,setLoading] = useState(true)
+const { selectItem,setSelectItem}  = useContext(contextAuth);
 
+useEffect(() => {
+    // Função para buscar todos os dados
+    const fetchData = async () => {
+      try {
+        // Executa todas as funções em paralelo e espera todas serem resolvidas
+        const [hoteisRes, restaurantsRes, touristicsRes] = await Promise.all([
+          getHoteis(),
+          getRestaurants(),
+          getTouristics(),
+        ]);
+  
+        // Manipula os dados recebidos de cada chamada
 
+        setListHoteis(hoteisRes.data);
+  
+ 
+        setListRestaurants(restaurantsRes.data);
+  
 
-useEffect(()=> {
-    getHoteis() 
-    .then((res)=> { 
-        console.log('res', res)
-        setListHoteis(res.data)
-        })
-        .catch((error)=> {
-            Toast.show({
-                text1:'Erro ao buscar estabelecimentos',
-                type:'error'
-            })
-            console.log('error', error)
-        })
-
-
-
-        getRestaurants() 
-        .then((res)=> { 
-            console.log('res', res)
-            setListRestaurants(res.data)
-            })
-            .catch((error)=> {
-                Toast.show({
-                    text1:'Erro ao buscar estabelecimentos',
-                    type:'error'
-                })
-                console.log('error', error)
-            })
-
-            getTouristics() 
-            .then((res)=> { 
-                console.log('res', res)
-                setPoints(res.data)
-                })
-                .catch((error)=> {
-                    Toast.show({
-                        text1:'Erro ao buscar pontos turísticos',
-                        type:'error'
-                    })
-                    console.log('error', error)
-                })
-},[])
-
+        setPoints(touristicsRes.data);
+  
+      } catch (error) {
+        // Mostra uma mensagem de erro em caso de falha de qualquer chamada
+        Toast.show({
+          text1: 'Erro ao buscar estabelecimentos ou pontos turísticos',
+          type: 'error',
+        });
+        console.log('error', error);
+      } finally {
+        // Define o loading como false após todas as requisições serem concluídas
+        setLoading(false);
+      }
+    };
+  
+    fetchData(); // Chama a função ao montar o componente
+  
+  }, []);
+  
 return(
     <SafeAreaView style={{flex:1, backgroundColor:'white'}}>
     <View style={styles.container}>
@@ -72,6 +72,13 @@ return(
         />
         </View>
       
+
+      {
+        loading ?
+      
+      <Loading loading/>
+
+        :
 <ScrollView style={styles.content}
 showsVerticalScrollIndicator={false}
 >
@@ -85,7 +92,7 @@ showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
        
-          <CardHoteis data={item}/>
+          <CardHoteis data={item} selectItem={selectItem} setSelectItem={setSelectItem}/>
           )}
         />
 
@@ -117,6 +124,9 @@ showsVerticalScrollIndicator={false}
         />
 </ScrollView>
 
+      }
+
+
     </View>
     </SafeAreaView>
 )
@@ -141,5 +151,10 @@ const styles = StyleSheet.create({
     },
     listHoteis:{
        
+    },
+    containerLoading:{
+        alignItems:'center',
+        justifyContent:'center',
+        marginTop:'40%'
     }
 })
