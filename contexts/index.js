@@ -16,6 +16,8 @@ const [loading,setLoading] = useState(false)
 const [userData,setUserData] = useState([])
 //armazena o local que foi selecionado
 const [selectItem,setSelectItem] = useState([])
+const [search,setSearch] =useState('')
+
     async function RegisterUser(name,email,password){
         setLoading(true)
 await createUserWithEmailAndPassword(auth,email,password)
@@ -121,7 +123,7 @@ if(error.code==='auth/invalid-email'){
 return(
 
 
-<contextAuth.Provider value={{loading, LoginUser, RegisterUser, userData,
+<contextAuth.Provider value={{loading, LoginUser, RegisterUser, userData,search,setSearch,
   selectItem,setSelectItem
 }}>
     {children}

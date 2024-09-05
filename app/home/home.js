@@ -22,14 +22,15 @@ import LottieView from "lottie-react-native";
 
 import { contextAuth } from "../../contexts";
 import Loading from "../../components/loading";
+import { router } from "expo-router";
 export default function Home() {
-  const [search, setSearch] = useState("");
+
   // armazena a lista de hoteis
   const [listHoteis, setListHoteis] = useState([]);
   const [listRestaurants, setListRestaurants] = useState([]);
   const [points, setPoints] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { selectItem, setSelectItem } = useContext(contextAuth);
+  const { selectItem, setSelectItem ,search,setSearch} = useContext(contextAuth);
 
   useEffect(() => {
     // Função para buscar todos os dados
@@ -65,11 +66,24 @@ export default function Home() {
     fetchData(); // Chama a função ao montar o componente
   }, []);
 
+function SearhchItem(){
+  if(search!==''){
+    router.push('/home/SearchResults')
+  }else{
+    Toast.show({
+      text1:'Preencha o campo de pesquisa',
+      type:'info'
+    })
+  }
+}
+
   return (
+    
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+    
       <View style={styles.container}>
         <View style={styles.header}>
-          <SearchBar value={search} onChangeText={setSearch} />
+          <SearchBar value={search} onChangeText={setSearch} onPress={SearhchItem} />
         </View>
 
         {loading ? (

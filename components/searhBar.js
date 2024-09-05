@@ -4,7 +4,7 @@ import { View,StyleSheet, TextInput, SafeAreaView } from 'react-native';
 import Search from 'react-native-vector-icons/AntDesign'
 // import { Container } from './styles';
 
-export default function SearchBar({value,onChangeText}){
+export default function SearchBar({value,onChangeText,onPress}){
     return (
         <SafeAreaView style={styles.container}>
 
@@ -17,7 +17,9 @@ export default function SearchBar({value,onChangeText}){
     onChangeText={onChangeText}
    
     /> 
-    <Button buttonStyle={styles.button}>
+    <Button buttonStyle={styles.button}
+    onPress={onPress}
+    >
 <Search name='search1' size={24} color={'white'}/>
     </Button>
         </SafeAreaView>
