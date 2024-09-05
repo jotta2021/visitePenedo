@@ -4,8 +4,8 @@ import { Button, Card } from '@rneui/themed';
 import { Rating } from 'react-native-ratings';
 import axios from 'axios';
 import api from '../services/api';
-
-const CardRestaurants = ({ data }) => {
+import { router } from 'expo-router';
+const CardRestaurants = ({ data,selectItem,setSelectItem }) => {
   const [imageUrl, setImageUrl] = useState(null);
 
   // Se o nome do local for muito grande, adiciona reticências
@@ -59,13 +59,18 @@ const CardRestaurants = ({ data }) => {
           />
         )}
         <View style={styles.info}>
-        <Text style={styles.title}>{handleTitle(data?.displayName.text)}</Text>
+        <Text style={styles.title}>{handleTitle(data?.displayName.text)}  </Text>
        
       </View>
       </View >
 
 <View style={styles.containerButton}>
-    <Button buttonStyle={styles.button} >Visitar</Button>
+    <Button buttonStyle={styles.button} 
+  onPress={()=> {setSelectItem(data)
+    router.push('/home/localePage')
+    
+          }}
+    >Visitar</Button>
 </View>
       
 

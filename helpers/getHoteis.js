@@ -13,7 +13,8 @@ export default async  function getHoteis(){
                 headers:{
                     'Content-Type': 'application/json',
                     'X-Goog-FieldMask': 'places.displayName,places.rating,places.photos,places.formattedAddress,places.reviews,places.internationalPhoneNumber',
-                'X-Goog-Api-Key': 'AIzaSyArpFGX90C-AtHaXwioqhTpe_kl1c1v-BY'
+                'X-Goog-Api-Key': 'AIzaSyArpFGX90C-AtHaXwioqhTpe_kl1c1v-BY',
+                "languageCode": 'pt-BR'
                 }
             }
             

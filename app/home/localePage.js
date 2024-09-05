@@ -80,15 +80,29 @@ const openWhatsApp = () => {
 
           <View style={styles.content}>
             <Text style={styles.title}>{selectItem.displayName.text}</Text>
+
+            {
+              selectItem.regularOpeningHours &&
+              <View style={styles.status}>
+              <View style={ selectItem.regularOpeningHours.openNow ===true ? styles.circle : styles.circleClose}></View>
+                <Text style={selectItem.regularOpeningHours.openNow ===true ? styles.open : styles.close}>{selectItem.regularOpeningHours.openNow ===true ? 'Aberto' : 'Fechado'}</Text>
+            </View>
+            }
+            
+          
             <Text style={styles.adress}>{selectItem?.formattedAddress}</Text>
 
             <View style={styles.containerButton}>
-              <Button buttonStyle={styles.buttonContact}
+              {
+                selectItem.internationalPhoneNumber && selectItem.internationalPhoneNumber!=='' &&
+                    <Button buttonStyle={styles.buttonContact}
               onPress={()=> setOpenContact(true)}
               >
                 <Phone name="phone" size={18} color="white" />
                 Contato
               </Button>
+              }
+          
               <Button buttonStyle={styles.buttonLocale}>Como chegar</Button>
             </View>
 
@@ -125,6 +139,7 @@ const openWhatsApp = () => {
        <View>
         <TextInput
         style={styles.input}
+        multiline
         value={message}
         onChangeText={(text)=> setMessage(text)}
 
@@ -204,5 +219,30 @@ width:250,
 marginTop:10,
 borderRadius:10,
 flexWrap:'wrap'
+  },
+  status:{
+flexDirection:'row',
+alignItems:'center',
+gap:2
+  },
+  circle:{
+    width:8,
+    height:8,
+    backgroundColor:'#14870c',
+    borderRadius:24
+  },
+  circleClose:{
+    width:8,
+    height:8,
+    backgroundColor:'red',
+    borderRadius:24
+  },
+  open:{
+    color:'#14870c',
+    fontWeight:'500'
+  },
+  close:{
+     color:'red',
+    fontWeight:'500'
   }
 });

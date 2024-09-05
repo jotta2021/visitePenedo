@@ -4,7 +4,7 @@ export default async  function getTouristics(){
 
    
         const data = {
-            "textQuery": "pontos turisticos penedo alagoas",
+            "textQuery": "Pontos turisticos Penedo Alagoas",
         "pageSize":10
         }
     
@@ -13,7 +13,8 @@ export default async  function getTouristics(){
                 headers:{
                     'Content-Type': 'application/json',
                     'X-Goog-FieldMask': 'places.displayName,places.rating,places.photos',
-                'X-Goog-Api-Key': 'AIzaSyArpFGX90C-AtHaXwioqhTpe_kl1c1v-BY'
+                'X-Goog-Api-Key': 'AIzaSyArpFGX90C-AtHaXwioqhTpe_kl1c1v-BY',
+                "languageCode": 'pt-BR'
                 }
             }
             
