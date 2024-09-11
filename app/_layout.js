@@ -7,7 +7,7 @@ import { contextAuth } from "../contexts";
 export default function Layout(){
 
     const {userData} = useContext(contextAuth)
-    console.log('userData',userData)
+    
     return(
         <ContextProvider>
 

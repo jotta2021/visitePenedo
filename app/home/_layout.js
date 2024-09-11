@@ -23,6 +23,12 @@ export default function RootLayout(){
            headerBackTitleVisible:false
         
         }}/>
+
+<Stack.Screen name="screenMap" options={{
+             title:`${selectItem?.displayName?.text}`,
+           headerBackTitleVisible:false
+        
+        }}/>
         </Stack>
     )
 }

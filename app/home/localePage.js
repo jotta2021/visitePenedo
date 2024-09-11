@@ -8,6 +8,7 @@ import { Button } from "@rneui/themed";
 import Phone from "react-native-vector-icons/Feather";
 import Reviews from "../../components/reviews";
 import { Dialog } from "@rneui/themed";
+import { router } from "expo-router";
 const LocalePage = () => {
   const { selectItem } = useContext(contextAuth);
   const [imageUris, setImageUris] = useState([]); // Array para armazenar URLs das imagens
@@ -17,7 +18,6 @@ const LocalePage = () => {
   // Função para buscar a URL da imagem
 
 
-  console.log('item',selectItem.reviews)
   const getImageUrls = async () => {
     setLoading(true);
     try {
@@ -47,9 +47,10 @@ const LocalePage = () => {
 
   // Hook para buscar as imagens ao montar o componente
   useEffect(() => {
-    if (selectItem?.photos && selectItem.photos.length > 0) {
-      getImageUrls();
-    }
+if (Array.isArray(selectItem?.photos) && selectItem.photos.length > 0) {
+  getImageUrls();
+}
+
   }, [selectItem]);
 // funcao pra enfiar mensagem no whatsapp
 
@@ -76,7 +77,12 @@ const openWhatsApp = () => {
         <Loading />
       ) : (
         <View>
-          <SwiperPhotos data={imageUris} />
+
+          {
+            imageUris && imageUris.length>0 &&
+            <SwiperPhotos data={imageUris} />
+          }
+          
 
           <View style={styles.content}>
             <Text style={styles.title}>{selectItem.displayName.text}</Text>
@@ -103,7 +109,9 @@ const openWhatsApp = () => {
               </Button>
               }
           
-              <Button buttonStyle={styles.buttonLocale}>Como chegar</Button>
+              <Button buttonStyle={styles.buttonLocale}
+              onPress={()=> router.push('/home/screenMap')}
+              >Como chegar</Button>
             </View>
 
             <View style={styles.ratingContainer}>

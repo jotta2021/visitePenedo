@@ -1,14 +1,18 @@
 
-import { createContext, useState } from "react";
+import { createContext, useState,useEffect } from "react";
 import { db,auth } from '../services/configFirebase'
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth'
 import  {doc,setDoc, getDoc} from 'firebase/firestore'
 import Toast from 'react-native-toast-message';
 import { router, Router } from 'expo-router';
 
-
+import * as Location from 'expo-location';
 
 export const contextAuth = createContext({})
+
+
+
+
 
 export default function ContextProvider({children}){
 
@@ -17,6 +21,40 @@ const [userData,setUserData] = useState([])
 //armazena o local que foi selecionado
 const [selectItem,setSelectItem] = useState([])
 const [search,setSearch] =useState('')
+
+
+const [location, setLocation] = useState(null);
+const [errorMsg, setErrorMsg] = useState(null);
+
+
+
+
+
+
+
+
+// função responsavel para pedir ao usuário permissão para acessar sua localização
+useEffect(() => {
+  (async () => {
+    
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      setErrorMsg('Permissão para acessar a localização foi negada.');
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+  })();
+}, []);
+
+
+
+
+
+
+
+
 
     async function RegisterUser(name,email,password){
         setLoading(true)
@@ -72,7 +110,7 @@ if(error.code==='auth/invalid-email'){
         try {
           // Tentativa de login
           const userCredential = await signInWithEmailAndPassword(auth, email, password);
-          console.log('realizando login');
+         
       
           const uid = userCredential.user.uid;
           const docRef = doc(db, 'user', uid);
@@ -124,7 +162,7 @@ return(
 
 
 <contextAuth.Provider value={{loading, LoginUser, RegisterUser, userData,search,setSearch,
-  selectItem,setSelectItem
+  selectItem,setSelectItem, location,setLocation
 }}>
     {children}
 </contextAuth.Provider>
