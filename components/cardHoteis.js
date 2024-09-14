@@ -47,7 +47,7 @@ const CardHoteis = ({ data ,  selectItem,setSelectItem}) => {
     <Card containerStyle={styles.card}>
       <TouchableOpacity
       onPress={()=> {setSelectItem(data)
-router.push('/home/localePage')
+router.push('/main/localePage')
 
       }}
       >
@@ -59,7 +59,7 @@ router.push('/home/localePage')
           />
         ) : (
           <Image
-            source={require('./../assets/img_referencia.jpg')}
+            source={require('./../assets/sem-foto.png')}
             style={styles.img}
           />
         )}
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '500',
-    color: 'grey',
+    color: 'black',
   },
   rating: {
     marginTop: 50,

@@ -21,7 +21,8 @@ const [userData,setUserData] = useState([])
 //armazena o local que foi selecionado
 const [selectItem,setSelectItem] = useState([])
 const [search,setSearch] =useState('')
-
+const [category,setCategory] = useState('')
+const [keysCategory,setKeysCategory] = useState('')
 
 const [location, setLocation] = useState(null);
 const [errorMsg, setErrorMsg] = useState(null);
@@ -124,7 +125,7 @@ if(error.code==='auth/invalid-email'){
             };
             
             setUserData(data);
-            router.push('/home');
+            router.push('/main/home');
           } else {
             console.log("Usuário não encontrado no Firestore");
           }
@@ -162,7 +163,7 @@ return(
 
 
 <contextAuth.Provider value={{loading, LoginUser, RegisterUser, userData,search,setSearch,
-  selectItem,setSelectItem, location,setLocation
+  selectItem,setSelectItem, location,setLocation,category,setCategory,keysCategory,setKeysCategory
 }}>
     {children}
 </contextAuth.Provider>

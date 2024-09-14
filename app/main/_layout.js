@@ -4,13 +4,12 @@ import { contextAuth } from "../../contexts";
 import Toast from "react-native-toast-message";
 export default function RootLayout(){
 
-    const{userData, selectItem} = useContext(contextAuth)
+    const{userData, selectItem,search,category} = useContext(contextAuth)
     return(
         <Stack>
            <Toast/>
-         <Stack.Screen name="home" options={{
-            title:`Olá, ${userData?.name} `,
-            headerBackVisible:false,
+         <Stack.Screen name="(drawer)" options={{
+        headerShown:false,
         
         }}/>
           <Stack.Screen name="localePage" options={{
@@ -19,7 +18,7 @@ export default function RootLayout(){
         
         }}/>
               <Stack.Screen name="SearchResults" options={{
-            title:'Resultados',
+            title:`Resultados para ${search || category}`,
            headerBackTitleVisible:false
         
         }}/>

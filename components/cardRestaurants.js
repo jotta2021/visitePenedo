@@ -54,7 +54,7 @@ const CardRestaurants = ({ data,selectItem,setSelectItem }) => {
           />
         ) : (
           <Image
-            source={require('./../assets/img_referencia.jpg')}
+            source={require('./../assets/sem-foto.png')}
             style={styles.img}
           />
         )}
@@ -67,7 +67,7 @@ const CardRestaurants = ({ data,selectItem,setSelectItem }) => {
 <View style={styles.containerButton}>
     <Button buttonStyle={styles.button} 
   onPress={()=> {setSelectItem(data)
-    router.push('/home/localePage')
+    router.push('/main/localePage')
     
           }}
     >Visitar</Button>

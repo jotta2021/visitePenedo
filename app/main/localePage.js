@@ -110,7 +110,7 @@ const openWhatsApp = () => {
               }
           
               <Button buttonStyle={styles.buttonLocale}
-              onPress={()=> router.push('/home/screenMap')}
+              onPress={()=> router.push('/main/screenMap')}
               >Como chegar</Button>
             </View>
 
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "500",
-    color: "grey",
+    color: "black",
   },
   adress: {
     color: "grey",
@@ -204,8 +204,9 @@ const styles = StyleSheet.create({
 marginTop:15, 
   },
   ratingTitle:{
-    color:'grey',
+    color:'black',
     fontSize:18,
+    marginBottom:10
   
   },
   modal:{

@@ -10,20 +10,20 @@ import Loading from "../../components/loading";
 // import { Container } from './styles';
 
 const searchResults = () => {
-  const { search, setSearch ,selectItem,setSelectItem} = useContext(contextAuth);
+  const { search, setSearch ,selectItem,setSelectItem ,category,keysCategory} = useContext(contextAuth);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   async function getData() {
     const data = {
-      textQuery: search,
+      textQuery: `${keysCategory || search} Penedo Alagoas`,
       locationBias: {
         circle: {
           center: {
             latitude: -10.2874,
             longitude: -36.5824,
           },
-          radius: 500.0,
+          radius: 10000,
         },
       },
     };
@@ -32,7 +32,7 @@ const searchResults = () => {
         headers: {
           "Content-Type": "application/json",
           "X-Goog-FieldMask":
-            "places.displayName,places.rating,places.photos,places.formattedAddress,places.reviews,places.internationalPhoneNumber,places.regularOpeningHours",
+            "places.displayName,places.rating,places.photos,places.formattedAddress,places.reviews,places.internationalPhoneNumber,places.regularOpeningHours,places.location",
           "X-Goog-Api-Key": "AIzaSyArpFGX90C-AtHaXwioqhTpe_kl1c1v-BY",
 
           languageCode: "pt-BR",
@@ -41,6 +41,7 @@ const searchResults = () => {
       .then((res) => {
         setData(res.data);
         setLoading(false);
+        
      
       })
       .catch((error) => {
