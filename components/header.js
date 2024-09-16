@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <View style={styles.header}>
             <View>
-                <Text style={styles.title}>Olá, {userData?.name.toUpperCase()}</Text>
+                <Text style={styles.title}>Olá, {userData?.name && userData?.name.toUpperCase()}</Text>
                 <Text style={styles.subtitle}>Explore os melhores lugares de Penedo</Text>
             </View>
            

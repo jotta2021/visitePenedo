@@ -7,6 +7,7 @@ export default function RootLayout(){
     const{userData, selectItem,search,category} = useContext(contextAuth)
     return(
         <Stack>
+          
            <Toast/>
          <Stack.Screen name="(drawer)" options={{
         headerShown:false,
@@ -27,6 +28,10 @@ export default function RootLayout(){
              title:`${selectItem?.displayName?.text}`,
            headerBackTitleVisible:false
         
+        }}/>
+        <Stack.Screen name="Hours" options={{
+    title:`${selectItem?.displayName?.text}`,
+         headerBackTitleVisible:false
         }}/>
         </Stack>
     )

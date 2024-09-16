@@ -13,7 +13,7 @@ import {
     Keyboard,
     ActivityIndicator
   } from 'react-native'
-  import { useState } from 'react'
+  import { useState,useEffect } from 'react'
   import Toast from 'react-native-toast-message';
   import { Input } from '@rneui/themed';
   import EmailIcon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -28,6 +28,14 @@ import { contextAuth } from '../contexts';
     const [name, setName] = useState('');
     const [password, setPassword] = useState('')
     const { RegisterUser,loading} = useContext(contextAuth);
+
+//sempre que acessar a tela limpa os campos
+useEffect(()=> {
+  setEmail('')
+  setPassword('')
+  setName('')
+},[])
+
     function Autentication() {
       if (name!==''&&email!=='' && password!=='') {
         
@@ -44,6 +52,7 @@ import { contextAuth } from '../contexts';
     
     return (
    <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
+  
       <KeyboardAvoidingView behavior='height' style={styles.container}>
   
         <View style={styles.imageContain}>
@@ -54,6 +63,7 @@ import { contextAuth } from '../contexts';
       
       />
         </View>
+        <Toast/>
         <View style={styles.form}>
           <Text style={styles.title}>Criar uma conta</Text>
   

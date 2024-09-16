@@ -14,7 +14,7 @@ import {
     ActivityIndicator,
   } from "react-native";
   
-  import { useContext, useState } from "react";
+  import { useContext, useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
   import { Input } from "@rneui/themed";
   import EmailIcon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -25,6 +25,15 @@ import { contextAuth } from "../contexts";
     const [password, setPassword] = useState("123456");
     const {LoginUser,loading, userData} =useContext(contextAuth);
     const navigation = useNavigation();
+
+//sempre que acessar a tela limpa os campos
+
+/** /
+useEffect(()=> {
+  setEmail('')
+  setPassword('')
+},[])
+*/
     function Autentication() {
       if (email !== "" && password !== "") {
     
@@ -41,6 +50,7 @@ import { contextAuth } from "../contexts";
     return (
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <Toast/>
           <View style={styles.imageContain}>
             <Image
               source={require('../assets/logo.png')}

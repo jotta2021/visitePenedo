@@ -162,7 +162,7 @@ if(error.code==='auth/invalid-email'){
 return(
 
 
-<contextAuth.Provider value={{loading, LoginUser, RegisterUser, userData,search,setSearch,
+<contextAuth.Provider value={{loading, LoginUser, RegisterUser, userData,setUserData,search,setSearch,
   selectItem,setSelectItem, location,setLocation,category,setCategory,keysCategory,setKeysCategory
 }}>
     {children}

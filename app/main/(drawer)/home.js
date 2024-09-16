@@ -179,7 +179,10 @@ export default function Home() {
               horizontal
               showsHorizontalScrollIndicator={false}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => <CardPoints data={item} />}
+              renderItem={({ item }) => <CardPoints data={item} 
+              selectItem={selectItem}
+              setSelectItem={setSelectItem}
+              />}
             />
           </ScrollView>
         )}

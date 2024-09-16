@@ -12,7 +12,8 @@ export default function Reviews({ data }) {
   }
 
   function FormatCaracteres(value) {
-    // Se o texto deve ser exibido completo, retorna o texto completo
+    if(value){
+       // Se o texto deve ser exibido completo, retorna o texto completo
     if (lerMais) return value;
     
     // Verifica se o valor tem mais de 100 caracteres e exibe apenas os primeiros 100 com '...'
@@ -21,6 +22,8 @@ export default function Reviews({ data }) {
     }
 
     return value;
+    }
+   
   }
 
   return (

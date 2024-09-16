@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FlatList, SafeAreaView, View } from "react-native";
+import { FlatList, SafeAreaView, View,Text } from "react-native";
 import { contextAuth } from "../../contexts";
 import axios from "axios";
 import api from "../../services/api";
 import Toast from "react-native-toast-message";
 import CardSearchResults from "../../components/CardSearchResults";
 import Loading from "../../components/loading";
-
+import { StyleSheet } from "react-native";
 // import { Container } from './styles';
 
 const searchResults = () => {
@@ -17,15 +17,7 @@ const searchResults = () => {
   async function getData() {
     const data = {
       textQuery: `${keysCategory || search} Penedo Alagoas`,
-      locationBias: {
-        circle: {
-          center: {
-            latitude: -10.2874,
-            longitude: -36.5824,
-          },
-          radius: 10000,
-        },
-      },
+
     };
     await axios
       .post(`${api}`, data, {
@@ -46,7 +38,7 @@ const searchResults = () => {
       })
       .catch((error) => {
         Toast.show({
-          text1: "Erro ao realizar busca",
+          text1: "Erro ao realizar busca, tente novamente",
           type: "error",
         });
         setLoading(false);
@@ -58,6 +50,7 @@ const searchResults = () => {
 
   return (
     <SafeAreaView >
+      <Toast/>
       {loading ? (
         <Loading />
       ) : (
@@ -68,8 +61,21 @@ const searchResults = () => {
           renderItem={({ item }) => <CardSearchResults data={item} selectItem={selectItem} setSelectItem={setSelectItem} />}
         />
       )}
+
+      {
+        data.length === 0 && loading===false &&
+        <Text style={styles.notFound} >Oops! parece que nada foi encontrado.</Text>
+      }
     </SafeAreaView>
   );
 };
 
 export default searchResults;
+
+
+const styles = StyleSheet.create({
+  notFound: {
+    textAlign:'center',
+    fontWeight:'500'
+  }
+})
