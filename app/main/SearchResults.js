@@ -25,7 +25,7 @@ const searchResults = () => {
           "Content-Type": "application/json",
           "X-Goog-FieldMask":
             "places.displayName,places.rating,places.photos,places.formattedAddress,places.reviews,places.internationalPhoneNumber,places.regularOpeningHours,places.location",
-          "X-Goog-Api-Key": "AIzaSyArpFGX90C-AtHaXwioqhTpe_kl1c1v-BY",
+          "X-Goog-Api-Key": "AIzaSyAvzGlp4hS_Cy8Xi2LE8fLWTH7DCht6ut0",
           "languageCode": "pt-BR",
         },
       })

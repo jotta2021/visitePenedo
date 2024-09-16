@@ -13,7 +13,7 @@ export default async  function getTouristics(){
                 headers:{
                     'Content-Type': 'application/json',
                     'X-Goog-FieldMask': 'places.displayName,places.rating,places.photos,places.location,places.reviews',
-                'X-Goog-Api-Key': 'AIzaSyArpFGX90C-AtHaXwioqhTpe_kl1c1v-BY',
+                'X-Goog-Api-Key': 'AIzaSyAvzGlp4hS_Cy8Xi2LE8fLWTH7DCht6ut0',
                 "languageCode": 'pt-BR'
                 }
             }
