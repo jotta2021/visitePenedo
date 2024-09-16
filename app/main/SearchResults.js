@@ -26,8 +26,7 @@ const searchResults = () => {
           "X-Goog-FieldMask":
             "places.displayName,places.rating,places.photos,places.formattedAddress,places.reviews,places.internationalPhoneNumber,places.regularOpeningHours,places.location",
           "X-Goog-Api-Key": "AIzaSyArpFGX90C-AtHaXwioqhTpe_kl1c1v-BY",
-
-          languageCode: "pt-BR",
+          "languageCode": "pt-BR",
         },
       })
       .then((res) => {

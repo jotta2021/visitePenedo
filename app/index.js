@@ -13,7 +13,7 @@ import {
   
   useEffect(()=> {
   setTimeout(()=> {
-  router.push('/login');
+  router.replace('/introdution');
   },300)
   
   },[])

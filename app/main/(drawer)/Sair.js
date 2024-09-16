@@ -9,7 +9,7 @@ const {userData,setUserData} = useContext(contextAuth)
   //realiza a funcao de logout do aplicativo
 useEffect(()=> {
 setUserData([])
-router.push('/login')
+router.replace('/login')
 },[])
   return <View />;
 }
