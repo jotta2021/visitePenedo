@@ -35,7 +35,8 @@ watchPositionAsync({
 const key=`AIzaSyArpFGX90C-AtHaXwioqhTpe_kl1c1v-BY`
   return (
     <View>
-        
+      {
+        location ?
         <MapView style={{width:'100%', height:'100%'}}
         ref={mapRef}
         initialRegion={{
@@ -81,7 +82,19 @@ const key=`AIzaSyArpFGX90C-AtHaXwioqhTpe_kl1c1v-BY`
             title="Sua localização"
             description="Você está aqui"
             />
-        </MapView>
+        </MapView> 
+
+
+: 
+
+<View style={{alignItems:'center', justifyContent:'center', height:'100%', marginStart:10, marginEnd:10}}>
+  <Text style={{fontWeight:'500', fontSize:18}}>Para acessar o mapa é necessário permitir que o app tenha acesso a sua localização</Text>
+  <Text  style={{fontWeight:'400', fontSize:18}}>Vá até as configurações do aplicativo, e ative as permissões de localização.</Text>
+</View>
+
+      }
+        
+      
     </View>
   )
 }

@@ -5,7 +5,7 @@ import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'fireba
 import  {doc,setDoc, getDoc} from 'firebase/firestore'
 import Toast from 'react-native-toast-message';
 import { router, Router } from 'expo-router';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Location from 'expo-location';
 
 export const contextAuth = createContext({})
@@ -48,7 +48,6 @@ useEffect(() => {
     setLocation(location);
   })();
 }, []);
-
 
 
 
@@ -105,7 +104,7 @@ if(error.code==='auth/invalid-email'){
 })
     }
 
-    async function LoginUser(email, password) {
+    async function LoginUser(email, password,remenber) {
         setLoading(true);
       
         try {
@@ -125,6 +124,11 @@ if(error.code==='auth/invalid-email'){
             };
             
             setUserData(data);
+            //se o botao lembrar de mim estiver marcado, armazena o usuario no localstorage
+            if(remenber===true){
+              AsyncStorage.setItem('user', JSON.stringify(data));
+            }
+            
             router.push('/main/home');
           } else {
             console.log("Usuário não encontrado no Firestore");
